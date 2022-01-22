@@ -31,8 +31,8 @@ bin_dirs :
 	@mkdir -p $(OBJ_PATH) $(TST_BIN_PATH) $(MAIN_BIN_PATH)
 src_dirs :
 	@mkdir -p $(LIB_PATH) $(TST_SRC_PATH) $(MAIN_SRC_PATH)
-
-
+#	@echo "thenga" >  $(LIB_PATH)readme.ini
+	
 bin : bin_msg bin_dirs $(MAIN_BIN)
 bin_msg :
 	@echo [BINS]
