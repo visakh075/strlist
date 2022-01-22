@@ -14,6 +14,7 @@ void strcpy(const char * frm,char * to)
 item::item()
 {
 	loc=NULL;
+	len=0;
 }
 item::~item()
 {
@@ -26,6 +27,7 @@ void item::set(const char * strptr)
 	if(loc!=NULL)
 	{
 		strcpy(strptr,loc);
+		len=strlen(strptr);
 	}
 	else
 	{
