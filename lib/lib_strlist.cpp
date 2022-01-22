@@ -13,6 +13,8 @@ void strcpy(const char * frm,char * to)
 }
 item::item()
 {
+	in=NULL;
+	out=NULL;
 	loc=NULL;
 	len=0;
 }
@@ -40,5 +42,10 @@ void item::operator = (const char* strptr)
 }
 void item::probe()
 {
-	printf("%p %p %10.10s\n",this,loc,loc);
+	printf("p:%p l:%p [i:%p o:%p] %10.10s\n",this,loc,in,out,loc);
+}
+void item::connect(item * _in,item * _out)
+{
+	in=_in;
+	out=_out;
 }
