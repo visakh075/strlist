@@ -6,7 +6,11 @@ SRC_PATH := src/
 
 BIN_PATH := bin/
 BIN := main.bin test_element.bin test_replace.bin
-BINS:= $(patsubst %.bin,$(BIN_PATH)%.bin,$(BIN))
+BINS := $(patsubst %.bin,$(BIN_PATH)%.bin,$(BIN))
+
+TST_PATH := test/src/
+TST_BIN_PATH := test/bin/
+TST_BIN := $(wildcard $(TEST_PATH)*.cpp)
 
 LIB_PATH := lib/
 OBJ_PATH := obj/
@@ -24,5 +28,7 @@ $(BIN_PATH)%.bin : $(SRC_PATH)%.cpp $(LIBS_OBJ_CPP)
 
 lib : $(LIBS_OBJ_CPP)
 	@echo Building Libraries
+tests :
+	@echo $(TST_BIN)
 clean:
 	rm -rf bin/* obj/*
