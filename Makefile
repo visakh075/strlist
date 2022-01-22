@@ -4,23 +4,22 @@ FLG := -g -Wall
 
 # PATHS AND FILES INFO
 
-MAIN_SRC_PATH := src/		
-MAIN_BIN_PATH := bin/
+MAIN_SRC_PATH = src/
+MAIN_BIN_PATH = bin/
+TST_SRC_PATH = t_src/
+TST_BIN_PATH = t_bin/
+LIB_PATH = lib/
+OBJ_PATH = obj/
+
 MAIN_SRC = $(wildcard $(MAIN_SRC_PATH)*.cpp)
 MAIN_BIN = $(patsubst $(MAIN_SRC_PATH)%.cpp,$(MAIN_BIN_PATH)%,$(MAIN_SRC))
-
-TST_SRC_PATH := t_src/
-TST_BIN_PATH := t_bin/
 TST_SRC = $(wildcard $(TST_SRC_PATH)*.cpp)
 TST_BIN = $(patsubst $(TST_SRC_PATH)%.cpp,$(TST_BIN_PATH)%,$(TST_SRC))
-	
-LIB_PATH := lib/
-OBJ_PATH := obj/
 LIBS_SRC = $(wildcard $(LIB_PATH)*.cpp)
 LIBS_OBJ = $(patsubst $(LIB_PATH)%.cpp,$(OBJ_PATH)%.o,$(LIBS_SRC))
 
 # GENERATOR MAKE FUNCTIONS
-all : all_msg bin libs
+all : all_msg bins libs tests
 all_msg :
 	clear
 init : init_msg src_dirs
@@ -36,7 +35,7 @@ src_dirs :
 	@mkdir -p $(LIB_PATH) $(TST_SRC_PATH) $(MAIN_SRC_PATH)
 
 
-bin : bin_msg bin_dirs $(MAIN_BIN)
+bins : bin_msg bin_dirs $(MAIN_BIN)
 bin_msg :
 	@echo [BINS]
 	@echo - Src Path: $(MAIN_SRC_PATH)
