@@ -13,12 +13,12 @@ void strcpy(const char * frm,char * to)
 }
 item::item()
 {
-	loc=nullptr;
+	loc=NULL;
 }
 item::~item()
 {
 	free(loc);
-	loc=nullptr;
+	loc=NULL;
 }
 void item::set(const char * strptr)
 {

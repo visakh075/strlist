@@ -3,14 +3,13 @@
 #include "lib_strlist.h"
 int main()
 {
-	printf("create\n");fflush(stdout);
 	element m;
+	m.probe();
 	
-	printf("%x %s\n",&m.loc,m.loc);
 	m.set("thengaaaaa");
 	
 	m="chakka";
-	printf("%x %s\n",&m.loc,m.loc);
+	m.probe();
 	printf("exit\n");fflush(stdout);
 	return 0;
 }

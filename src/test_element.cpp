@@ -15,10 +15,8 @@ int main()
 
 	for(int i=0;i<TEST_N;i++)
 	{
-		printf("\n%x %s",&m[i],m[i].loc);
+		m[i].probe();
 	}
 
-
-	for(int i=0;i<TEST_N;i++)
 	return 0;
 }
