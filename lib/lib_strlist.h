@@ -13,17 +13,21 @@ class item_c{
 		void operator = (const char *);
 		void probe();
 		void connect(item_c *,item_c *);
+		void set_tail(item_c *);
+		void set_head(item_c *);
 };
 typedef class item_c item;
 class strlist_c{
 	public:
-		item * _temp ;
-		item * start;
-		item * end;
+		//item * _temp ;
+		item * head;
+		item * tail;
 		uint count;
 		strlist_c();
 		~strlist_c();
 		void push(const char *);
+		void probe();
+		void show();
 };
 typedef class strlist_c strlist; 
 uint strlen(const char *);

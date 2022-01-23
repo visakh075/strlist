@@ -49,23 +49,68 @@ void item_c::connect(item_c * _in,item_c * _out)
 	in=_in;
 	out=_out;
 }
+void item_c::set_tail(item_c * _tail)
+{
+	out=_tail;
+}
+void item_c::set_head(item_c * _head)
+{
+	in=_head;
+}
 strlist_c::strlist_c()
 {
-	start=NULL;
-	end=NULL;
+	head=(item *)malloc(sizeof(item*));
+	tail=(item *)malloc(sizeof(item*));
+	
+	head=NULL;
+	tail=NULL;
 	count=0;
 }
 strlist_c::~strlist_c()
 {
 }
+void strlist_c::probe()
+{
+	printf("strlist probe\nh:%p t:%p\n",head,tail);
+}
 void strlist_c::push(const char * str)
 {
-	//_temp=NULL;
-	// _temp=NULL;
-	_temp=(item *)malloc(sizeof(item));
-	//_temp->set(str);
-	//_temp->in=end;
-	_temp->probe();
-	//end=_temp;
+	// Initialize new item _push
+	item * _temp;
+	// free(_temp);
+	_temp=NULL;
+	_temp=(item *)realloc(_temp,sizeof(item));
+	_temp->loc=NULL;
+	_temp->set(str);
 	
+	if(!count)
+	{
+		head=_temp;
+		tail=NULL;
+		count++;
+	}
+	else
+	{
+		_temp->set_head(head);
+		head=_temp;
+		count++;
+	}
+	// probe();
+
+	//tail->set_tail(_temp);
+	//_temp->set_head(tail);
+	// _temp->probe();
+}
+void strlist::show()
+{
+	printf("%d\n",count);
+	probe();
+	item * temp;
+	temp=head;
+	while(count)
+	{
+		temp->probe();
+		temp=temp->in;
+		count--;
+	}
 }
