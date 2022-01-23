@@ -49,13 +49,15 @@ void item_c::connect(item_c * _in,item_c * _out)
 	in=_in;
 	out=_out;
 }
-void item_c::set_tail(item_c * _tail)
+void item_c::set_out(item_c * _to)
 {
-	out=_tail;
+	out=_to;
+	_to->in=out;
 }
-void item_c::set_head(item_c * _head)
+void item_c::set_in(item_c * _from)
 {
-	in=_head;
+	in=_from;
+	_from->out=in;
 }
 strlist_c::strlist_c()
 {
@@ -76,30 +78,35 @@ void strlist_c::probe()
 void strlist_c::push(const char * str)
 {
 	// Initialize new item _push
-	item * _temp;
-	// free(_temp);
-	_temp=NULL;
+	item* _temp=NULL;
 	_temp=(item *)realloc(_temp,sizeof(item));
 	_temp->loc=NULL;
 	_temp->set(str);
 	
-	if(!count)
+	if(count==0)
 	{
+		_temp->in=NULL;
 		head=_temp;
 		tail=NULL;
-		count++;
+		count=1;
+	}
+	else if(count==1)
+	{
+		_temp->set_in(head);
+		_temp->out=NULL;
+		tail=_temp;
+		
+		count=2;
 	}
 	else
 	{
-		_temp->set_head(head);
-		head=_temp;
+		_temp->set_in(tail);
+		_temp->out=NULL;
+		
 		count++;
 	}
-	// probe();
-
-	//tail->set_tail(_temp);
-	//_temp->set_head(tail);
-	// _temp->probe();
+	_temp->probe();
+	free(_temp);
 }
 void strlist::show()
 {
@@ -107,10 +114,16 @@ void strlist::show()
 	probe();
 	item * temp;
 	temp=head;
-	while(count)
+	uint idx=0;
+	for(;idx<count;idx++)
 	{
 		temp->probe();
 		temp=temp->in;
-		count--;
 	}
+	// while(count)
+	// {
+	// 	temp->probe();
+	// 	temp=temp->out;
+	// 	count--;
+	// }
 }

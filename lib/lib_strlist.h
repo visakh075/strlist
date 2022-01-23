@@ -13,8 +13,8 @@ class item_c{
 		void operator = (const char *);
 		void probe();
 		void connect(item_c *,item_c *);
-		void set_tail(item_c *);
-		void set_head(item_c *);
+		void set_out(item_c *);
+		void set_in(item_c *);
 };
 typedef class item_c item;
 class strlist_c{
