@@ -1,5 +1,5 @@
 # COMPILER INFO
-CC_CPP := g++
+CC_CPP := clang++
 FLG := -g -Wall
 
 # PATHS AND FILES INFO

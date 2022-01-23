@@ -5,7 +5,7 @@
 #include "lib_strlist.h"
 int main()
 {
-	element m[TEST_N];
+	item m[TEST_N];
 	const char * ts="TEST_STRING";
 	for(int i=0;i<TEST_N;i++)
 	{

@@ -5,7 +5,7 @@
 #include "lib_strlist.h"
 int main()
 {
-	element m[TEST_N];
+	item m[TEST_N];
 	const char * ts="TEST_STRING";
 	const char * ts_long="1234567890abcdefghijklmnopqrstuvwxyz`1234567890-=~!#$%^&*()*()_+[]{}";
 	const char * ts_short="TEST";

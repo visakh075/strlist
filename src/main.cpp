@@ -3,7 +3,7 @@
 #include "lib_strlist.h"
 int main()
 {
-	element m;
+	item m;
 	m.probe();
 	
 	m.set("thengaaaaa");
