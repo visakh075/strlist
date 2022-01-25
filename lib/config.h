@@ -1,0 +1,3 @@
+#define ARRAY_TYPE 123
+#define LINK_LIST 456
+#define L_TYPE LINK_LIST

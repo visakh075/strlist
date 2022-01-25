@@ -11,6 +11,8 @@ TST_BIN_PATH = t_bin/
 LIB_PATH = lib/
 OBJ_PATH = obj/
 
+ADD_OBJ = obj/lib_rtlog.o
+
 MAIN_SRC = $(wildcard $(MAIN_SRC_PATH)*.cpp)
 MAIN_BIN = $(patsubst $(MAIN_SRC_PATH)%.cpp,$(MAIN_BIN_PATH)%,$(MAIN_SRC))
 TST_SRC = $(wildcard $(TST_SRC_PATH)*.cpp)
@@ -66,8 +68,8 @@ $(OBJ_PATH)%.o : $(LIB_PATH)%.cpp
 
 # -tests
 $(TST_BIN_PATH)% : $(TST_SRC_PATH)%.cpp $(LIBS_OBJ)
-	$(CC_CPP) $(FLG) -o $@ $^ -I $(LIB_PATH)
+	$(CC_CPP) $(FLG) -o $@ $^ $(ADD_OBJ) -I $(LIB_PATH)
 
 # -main
 $(MAIN_BIN_PATH)% : $(MAIN_SRC_PATH)%.cpp $(LIBS_OBJ)
-	$(CC_CPP) $(FLG) -o $@ $^ -I $(LIB_PATH)
+	$(CC_CPP) $(FLG) -o $@ $^ $(ADD_OBJ) -I $(LIB_PATH)

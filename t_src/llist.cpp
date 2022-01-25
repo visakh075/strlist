@@ -17,6 +17,9 @@ rtlog log=rtlog("result",APPEND);
 int main()
 {
 	
+	item * llist=(item*)malloc(sizeof(item*));
+	llist->set("kkkk");
+	
 	#if(TEST_N1_EN==1)
 	strlist list1;
 	for (size_t i = 0; i < TEST_N1; i++)
@@ -36,13 +39,18 @@ int main()
 	#endif
 
 	#if(TEST_NX_EN==1)
-	strlist listx;
+	//strlist listx;
+	
+	//llist->probe();
 	for (size_t i = 0; i < TEST_NX; i++)
 	{
-		listx.push(dummy[i]);
-		log + dummy[i];
+		llist->push(dummy[i]);
+		//llist->probe();
+		//llist=llist->out;
+		//log + dummy[i];
 	}
-	listx.show();
+
+	
 	#endif
 
 	return 0;

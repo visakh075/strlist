@@ -5,9 +5,19 @@ Aenean luctus magna quis nisi vehicula, vitae aliquam massa viverra. Aliquam at 
 Proin elementum est a lacus euismod tincidunt. Morbi ut ipsum id ex accumsan mattis. Proin a tempor ligula. Cras vehicula libero eu facilisis lacinia. Maecenas porttitor rutrum dui ut fermentum. Aliquam eget feugiat sapien. Pellentesque malesuada malesuada pharetra. Morbi rutrum sagittis nibh eu sodales. Cras faucibus erat nec interdum ornare. Donec eu ex tellus. Cras efficitur consequat cursus. Pellentesque nec felis vel massa ultricies placerat.'''
 words=Text.split()
 
+extra ='''
+
+
+
+'''
+
 f=open("dummy.h","w")
 dmw=0
+f.write('const char* dummy['+str(len(words))+']={\n')
 for word in words:
-    f.write("#define dmw"+str(dmw)+' (const char *) "'+word+'"\n')
+    f.write('"'+word+'"')
     dmw+=1
+    if(dmw!=len(words)):
+        f.write(',\n')
+f.write('};')
 f.close()

@@ -1,6 +1,10 @@
 #include "lib_strlist.h"
+#include "config.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "lib_rtlog.h"
+char buff[100];
+rtlog map=rtlog("mem_map",NORMAL);
 uint strlen(const char * strptr)
 {
 	uint retVal=0;
@@ -11,21 +15,38 @@ void strcpy(const char * frm,char * to)
 {
 	while(*to++=*frm++);
 }
+item_c::item_c(const char * _str)
+{
+	//Pitem_c();
+	sprintf(buff,"cr : %p %p str",this,_str);
+	map + buff;
+	set(_str);
+}
 item_c::item_c()
 {
-	in=NULL;
-	out=NULL;
-	loc=NULL;
+	
+
+	in=(item_c *)malloc(sizeof(item_c *));
+	out=(item_c *)malloc(sizeof(item_c *));
+	loc=(char *)malloc(sizeof(char *));
 	len=0;
+	sprintf(buff,"cr : %p %p null",this,loc);
+	map + buff;
 }
 item_c::~item_c()
 {
-	free(loc);
+	sprintf(buff,"dr : %p %s",this,loc);
+	map + buff;
+	in=NULL;
+	out=NULL;
 	loc=NULL;
+	// free(loc);
 }
 void item_c::set(const char * strptr)
 {
-	loc=(char *)realloc(loc,sizeof(char)*strlen(strptr)+1);
+	loc=NULL;
+	loc=(char *)realloc(loc,sizeof(char *)*strlen(strptr)+1);
+	
 	if(loc!=NULL)
 	{
 		strcpy(strptr,loc);
@@ -33,39 +54,48 @@ void item_c::set(const char * strptr)
 	}
 	else
 	{
-		printf("\nmallloc error");
+		printf("\nmallloc error");fflush(stdout);
 	}
 }
+/*
 void item_c::operator = (const char* strptr)
 {
 	set(strptr);
 }
+*/
 void item_c::probe()
 {
-	printf("p:%p l:%p [i:%p o:%p] %10.10s\n",this,loc,in,out,loc);
+	printf("\np:%p l:%p [i:%p o:%p] %s",this,loc,in,out,loc);
 }
 void item_c::connect(item_c * _in,item_c * _out)
 {
-	in=_in;
-	out=_out;
+	// in=_in;
+	// out=_out;
 }
 void item_c::set_out(item_c * _to)
 {
-	out=_to;
-	_to->in=out;
+	//out=_to;
+	//_to->in=out;
 }
 void item_c::set_in(item_c * _from)
 {
-	in=_from;
-	_from->out=in;
+	//in=_from;
+	//_from->out=in;
 }
+
+void item_c::push(const char * _str)
+{
+	item_c temp=item_c(_str);
+	//temp.set(_str);
+	out=&temp;
+	//temp.probe();
+}
+
 strlist_c::strlist_c()
 {
 	head=(item *)malloc(sizeof(item*));
 	tail=(item *)malloc(sizeof(item*));
-	
-	head=NULL;
-	tail=NULL;
+	list=(item **)malloc(sizeof(item**));
 	count=0;
 }
 strlist_c::~strlist_c()
@@ -75,17 +105,19 @@ void strlist_c::probe()
 {
 	printf("strlist probe\nh:%p t:%p\n",head,tail);
 }
+
+#if(L_TYPE==LINK_LIST)
 void strlist_c::push(const char * str)
 {
 	// Initialize new item _push
-	item* _temp=NULL;
-	_temp=(item *)realloc(_temp,sizeof(item));
-	_temp->loc=NULL;
+	_buff=(item**)malloc(sizeof(item **));
+	*_buff=(item *)malloc(sizeof(item*));
+	_temp=*_buff;
 	_temp->set(str);
-	
+
+
 	if(count==0)
 	{
-		_temp->in=NULL;
 		head=_temp;
 		tail=NULL;
 		count=1;
@@ -93,21 +125,18 @@ void strlist_c::push(const char * str)
 	else if(count==1)
 	{
 		_temp->set_in(head);
-		_temp->out=NULL;
 		tail=_temp;
-		
 		count=2;
 	}
 	else
 	{
 		_temp->set_in(tail);
-		_temp->out=NULL;
-		
 		count++;
 	}
 	_temp->probe();
-	free(_temp);
+	count++;
 }
+
 void strlist::show()
 {
 	printf("%d\n",count);
@@ -120,10 +149,24 @@ void strlist::show()
 		temp->probe();
 		temp=temp->in;
 	}
-	// while(count)
-	// {
-	// 	temp->probe();
-	// 	temp=temp->out;
-	// 	count--;
-	// }
 }
+#elif(L_TYPE==ARRAY_TYPE)
+void strlist_c::push(const char * str)
+{
+	//
+	
+	count++;
+	list=(item **)realloc(list,count*sizeof(item**));
+	if(list!=NULL)
+	{
+		list[count-1]->set(str);
+	}
+}
+void strlist_c::show()
+{
+	for(uint idx=0;idx<count;idx++)
+	{
+		list[idx]->probe();
+	}
+}
+#endif
