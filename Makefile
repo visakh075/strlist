@@ -11,7 +11,7 @@ TST_BIN_PATH = t_bin/
 LIB_PATH = lib/
 OBJ_PATH = obj/
 
-ADD_OBJ = obj/lib_rtlog.o
+EXT_LIB_PATH = extlib/
 
 MAIN_SRC = $(wildcard $(MAIN_SRC_PATH)*.cpp)
 MAIN_BIN = $(patsubst $(MAIN_SRC_PATH)%.cpp,$(MAIN_BIN_PATH)%,$(MAIN_SRC))
@@ -19,7 +19,7 @@ TST_SRC = $(wildcard $(TST_SRC_PATH)*.cpp)
 TST_BIN = $(patsubst $(TST_SRC_PATH)%.cpp,$(TST_BIN_PATH)%,$(TST_SRC))
 LIBS_SRC = $(wildcard $(LIB_PATH)*.cpp)
 LIBS_OBJ = $(patsubst $(LIB_PATH)%.cpp,$(OBJ_PATH)%.o,$(LIBS_SRC))
-
+EXT_OBJ=$(wildcard $(EXT_LIB_PATH)*.o)
 # GENERATOR MAKE FUNCTIONS
 all : all_msg bins libs tests
 all_msg :
@@ -64,12 +64,12 @@ clean:
 
 # -libraries
 $(OBJ_PATH)%.o : $(LIB_PATH)%.cpp
-	$(CC_CPP) $(FLG) -c $< -o $@
+	$(CC_CPP) $(FLG) -c $< -o $@ -I $(EXT_LIB_PATH)
 
 # -tests
 $(TST_BIN_PATH)% : $(TST_SRC_PATH)%.cpp $(LIBS_OBJ)
-	$(CC_CPP) $(FLG) -o $@ $^ $(ADD_OBJ) -I $(LIB_PATH)
+	$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH)
 
 # -main
 $(MAIN_BIN_PATH)% : $(MAIN_SRC_PATH)%.cpp $(LIBS_OBJ)
-	$(CC_CPP) $(FLG) -o $@ $^ $(ADD_OBJ) -I $(LIB_PATH)
+	$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH)

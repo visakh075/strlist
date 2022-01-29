@@ -12,24 +12,26 @@ int main()
 	printf("Before\n");
 	for(int i=0;i<TEST_N;i++)
 	{
-		m[i]=dummy[i];
+		//m[i]=dummy[i];
 		fflush(stdout);
 	}
 
 	for(int i=0;i<TEST_N;i++)
 	{	
-		m[i].probe();
+		//m[i].probe();
 		fflush(stdout);
 	}
 	
+
 	// REPLACE
 	for(int i=0;i<TEST_N;i+=2)
 	{
-		m[i]=dummy[TEST_N+i];
+		
+		//m[i]=dummy[TEST_N+i];
 	}
 		
 	// PRESENT
-	printf("After\n");
+	printf("\nAfter\n");
 	for(int i=0;i<TEST_N;i++)
 	{
 		m[i].probe();

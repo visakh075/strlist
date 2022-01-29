@@ -45,7 +45,7 @@ int main()
 	for (size_t i = 0; i < TEST_NX; i++)
 	{
 		llist->push(dummy[i]);
-		//llist->probe();
+		llist->probe();
 		//llist=llist->out;
 		//log + dummy[i];
 	}

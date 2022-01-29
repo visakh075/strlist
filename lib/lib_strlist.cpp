@@ -18,24 +18,23 @@ void strcpy(const char * frm,char * to)
 item_c::item_c(const char * _str)
 {
 	//Pitem_c();
-	sprintf(buff,"cr : %p %p str",this,_str);
-	map + buff;
+	
+	//sprintf(buff,"item : %p %s str",this,_str);
+	//map + buff;
 	set(_str);
 }
 item_c::item_c()
 {
-	
-
 	in=(item_c *)malloc(sizeof(item_c *));
 	out=(item_c *)malloc(sizeof(item_c *));
 	loc=(char *)malloc(sizeof(char *));
 	len=0;
-	sprintf(buff,"cr : %p %p null",this,loc);
+	sprintf(buff,"item * : %p %p",this,loc);
 	map + buff;
 }
 item_c::~item_c()
 {
-	sprintf(buff,"dr : %p %s",this,loc);
+	sprintf(buff,"item ~ : %p %p %s",this,loc,loc);
 	map + buff;
 	in=NULL;
 	out=NULL;
@@ -56,6 +55,9 @@ void item_c::set(const char * strptr)
 	{
 		printf("\nmallloc error");fflush(stdout);
 	}
+	
+	sprintf(buff,"item < : %p %p %s",this,loc,loc);
+	map + buff;
 }
 /*
 void item_c::operator = (const char* strptr)
