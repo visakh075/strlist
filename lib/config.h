@@ -15,11 +15,8 @@
     #endif
 
     // Wrappper
-    #define MEM_MAP ({\
-    #if(LOG_ENSY==1)\
-     map + buff\
-    #endif\
-    })
+    #define MEM_MAP map + buff
+    #define MEM_MAPS(x) ({sprintf(buff,x);map+buff;})
 //  DEBUG <<
 
 #endif

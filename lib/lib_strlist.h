@@ -20,7 +20,7 @@ class item_c{
 		void connect(item_c *,item_c *);
 		void set_out(item_c *);
 		void set_in(item_c *);
-		void push(const char *);
+		item_c* push(const char *);
 };
 typedef class item_c item;
 class strlist_c{

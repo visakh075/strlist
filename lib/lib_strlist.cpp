@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "lib_rtlog.h"
-
+#include <cstddef>
 //	DEBUG >>
 	// Definition
 	#if(LOG_ENSY==1)
@@ -30,9 +30,9 @@ item_c::item_c(const char * _str)
 }
 item_c::item_c()
 {
-	in=(item_c *)malloc(sizeof(item_c *));
-	out=(item_c *)malloc(sizeof(item_c *));
-	loc=(char *)malloc(sizeof(char *));
+	in=(item_c *)malloc(sizeof(item_c));
+	out=(item_c *)malloc(sizeof(item_c));
+	loc=(char *)malloc(sizeof(char));
 	len=0;
 
 	#if(LOG_ENSY==1)
@@ -48,17 +48,18 @@ item_c::~item_c()
 	#endif
 	
 	
-	in=NULL;
-	out=NULL;
-	loc=NULL;
+	in=nullptr;
+	out=nullptr;
+	loc=nullptr;
 	// free(loc);
 }
 void item_c::set(const char * strptr)
 {
-	loc=NULL;
-	loc=(char *)realloc(loc,sizeof(char *)*strlen(strptr)+1);
+	loc=nullptr;
 	
-	if(loc!=NULL)
+	loc=(char *)realloc(loc,sizeof(char)*strlen(strptr)+1);
+	
+	if(loc!=nullptr)
 	{
 		strcpy(strptr,loc);
 		len=strlen(strptr);
@@ -72,7 +73,6 @@ void item_c::set(const char * strptr)
 	sprintf(buff,"item < : %p %p %s",this,loc,loc);
 	LOG();
 	#endif
-
 }
 /*
 void item_c::operator = (const char* strptr)
@@ -100,11 +100,20 @@ void item_c::set_in(item_c * _from)
 	//_from->out=in;
 }
 
-void item_c::push(const char * _str)
+item_c* item_c::push(const char * _str)
 {
-	item_c temp=item_c(_str);
+	MEM_MAPS("PUSH >>");
+	item_c* temp;
+	temp=(item_c *) malloc(sizeof(item));
+	temp->set(_str);
+	
+	//item_c(_str);
 	//temp.set(_str);
-	out=&temp;
+	//in=temp;
+	out=nullptr;
+	temp->out=this;
+	MEM_MAPS("<<PUSH");
+	return temp;
 	//temp.probe();
 }
 
@@ -137,7 +146,7 @@ void strlist_c::push(const char * str)
 	if(count==0)
 	{
 		head=_temp;
-		tail=NULL;
+		tail=nullptr;
 		count=1;
 	}
 	else if(count==1)
@@ -175,7 +184,7 @@ void strlist_c::push(const char * str)
 	
 	count++;
 	list=(item **)realloc(list,count*sizeof(item**));
-	if(list!=NULL)
+	if(list!=nullptr)
 	{
 		list[count-1]->set(str);
 	}
