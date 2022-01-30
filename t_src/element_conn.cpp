@@ -17,7 +17,7 @@ int main()
 
 	for(int i=1;i<TEST_N-1;i++)
 	{
-		m[i].connect(&m[i-1],&m[i+1]);
+		//m[i].connect(&m[i-1],&m[i+1]);
 	}
 
 	printf("\n Allocation and Connect\n");

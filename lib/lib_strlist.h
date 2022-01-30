@@ -15,7 +15,6 @@ class item_c{
 		~item_c();
 		void set(const char *);
 		void reset(const char *);
-		//void operator = (const char *);
 		void probe();
 		void connect(item_c *,item_c *);
 		void set_out(item_c *);
@@ -25,14 +24,8 @@ class item_c{
 typedef class item_c item;
 class strlist_c{
 	public:
-		item * _temp;
-		item ** _buff;
-		item * head;
-		item * tail;
-		#if(L_TYPE==ARRAY_TYPE)
-		item ** list;
-		#endif
-		uint count;
+		item_c * head ,* tail;
+		uint ListCount;
 		strlist_c();
 		~strlist_c();
 		void push(const char *);

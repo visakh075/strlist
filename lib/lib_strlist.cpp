@@ -46,12 +46,11 @@ item_c::~item_c()
 	sprintf(buff,"item ~ : %p %p %s",this,loc,loc);
 	LOG();
 	#endif
-	
-	
+		
 	in=nullptr;
 	out=nullptr;
 	loc=nullptr;
-	// free(loc);
+
 }
 void item_c::set(const char * strptr)
 {
@@ -74,30 +73,10 @@ void item_c::set(const char * strptr)
 	LOG();
 	#endif
 }
-/*
-void item_c::operator = (const char* strptr)
-{
-	set(strptr);
-}
-*/
+
 void item_c::probe()
 {
 	printf("\np:%p l:%p [i:%p o:%p] %s",this,loc,in,out,loc);
-}
-void item_c::connect(item_c * _in,item_c * _out)
-{
-	// in=_in;
-	// out=_out;
-}
-void item_c::set_out(item_c * _to)
-{
-	//out=_to;
-	//_to->in=out;
-}
-void item_c::set_in(item_c * _from)
-{
-	//in=_from;
-	//_from->out=in;
 }
 
 item_c* item_c::push(const char * _str)
@@ -107,24 +86,18 @@ item_c* item_c::push(const char * _str)
 	temp=(item_c *) malloc(sizeof(item));
 	temp->set(_str);
 	
-	//item_c(_str);
-	//temp.set(_str);
-	//in=temp;
 	out=nullptr;
 	temp->out=this;
 	MEM_MAPS("<<PUSH");
 	return temp;
-	//temp.probe();
-}
 
+}
+// STRLIST
 strlist_c::strlist_c()
 {
-	head=(item *)malloc(sizeof(item*));
-	tail=(item *)malloc(sizeof(item*));
-	#if(L_TYPE==ARRAY_TYPE)
-	list=(item **)malloc(sizeof(item**));
-	#endif
-	count=0;
+	head=(item *)malloc(sizeof(item));
+	tail=(item *)malloc(sizeof(item));
+	ListCount=0;
 }
 strlist_c::~strlist_c()
 {
@@ -133,67 +106,40 @@ void strlist_c::probe()
 {
 	printf("strlist probe\nh:%p t:%p\n",head,tail);
 }
-#if(L_TYPE==LINK_LIST)
-void strlist_c::push(const char * str)
+void strlist_c::push(const char * _str)
 {
-	// Initialize new item _push
-	_buff=(item**)malloc(sizeof(item **));
-	*_buff=(item *)malloc(sizeof(item*));
-	_temp=*_buff;
-	_temp->set(str);
-
-
-	if(count==0)
+	item * temp=nullptr;
+	if(ListCount==0)
 	{
-		head=_temp;
-		tail=nullptr;
-		count=1;
+		head->set(_str);
+		head->in=nullptr;
+		head->out=nullptr;
+		ListCount=1;
 	}
-	else if(count==1)
+	else if(ListCount==1)
 	{
-		_temp->set_in(head);
-		tail=_temp;
-		count=2;
+		tail->set(_str);
+		tail->in=head;
+		tail->out=nullptr;
+		ListCount=2;
 	}
 	else
 	{
-		_temp->set_in(tail);
-		count++;
+		temp->set(_str);
+		temp->in=tail;
+		temp->out=nullptr;
+		tail=temp;
+		ListCount++;
 	}
-	_temp->probe();
-	count++;
 }
-
-void strlist::show()
+void strlist_c::show()
 {
-	printf("%d\n",count);
-	probe();
 	item * temp;
 	temp=head;
-	uint idx=0;
-	for(;idx<count;idx++)
+
+	while(temp->in!=nullptr)
 	{
 		temp->probe();
 		temp=temp->in;
 	}
 }
-#elif(L_TYPE==ARRAY_TYPE)
-void strlist_c::push(const char * str)
-{
-	//
-	
-	count++;
-	list=(item **)realloc(list,count*sizeof(item**));
-	if(list!=nullptr)
-	{
-		list[count-1]->set(str);
-	}
-}
-void strlist_c::show()
-{
-	for(uint idx=0;idx<count;idx++)
-	{
-		list[idx]->probe();
-	}
-}
-#endif
