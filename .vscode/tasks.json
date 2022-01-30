@@ -36,5 +36,12 @@
             "problemMatcher": [],
             "group": "build"
         },
+        {
+            "label": "Clean and build",
+            "type": "shell",
+            "command": "make clean && make all",
+            "problemMatcher": [],
+            "group": "build"
+        },
     ]
 }

@@ -1,5 +1,9 @@
 #ifndef __STRLIST__
 #define __STRLIST__
+
+#include "config.h"
+
+
 typedef unsigned int uint;
 class item_c{
 	public:

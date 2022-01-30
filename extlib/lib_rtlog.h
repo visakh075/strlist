@@ -1,3 +1,5 @@
+#ifndef _RTLOG_
+#define _RTLOG_
 #include<stdio.h>
 #define N_MODE "wb"
 #define A_MODE "ab"
@@ -26,3 +28,4 @@ public:
 
 
 typedef class c_rtlog rtlog;
+#endif

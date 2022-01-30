@@ -1,10 +1,19 @@
-#include "lib_strlist.h"
+
 #include "config.h"
+#include "lib_strlist.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include "lib_rtlog.h"
-char buff[100];
-rtlog map=rtlog("mem_map",NORMAL);
+
+//	DEBUG >>
+	// Definition
+	#if(LOG_ENSY==1)
+	rtlog map=rtlog(LOG_FILE,NORMAL);
+	char buff[LOG_BUFF_SZ];
+	#define LOG() map + buff
+	#endif
+//	DEBUG <<
+
 uint strlen(const char * strptr)
 {
 	uint retVal=0;
@@ -17,10 +26,6 @@ void strcpy(const char * frm,char * to)
 }
 item_c::item_c(const char * _str)
 {
-	//Pitem_c();
-	
-	//sprintf(buff,"item : %p %s str",this,_str);
-	//map + buff;
 	set(_str);
 }
 item_c::item_c()
@@ -29,13 +34,20 @@ item_c::item_c()
 	out=(item_c *)malloc(sizeof(item_c *));
 	loc=(char *)malloc(sizeof(char *));
 	len=0;
+
+	#if(LOG_ENSY==1)
 	sprintf(buff,"item * : %p %p",this,loc);
-	map + buff;
+	LOG();
+	#endif
 }
 item_c::~item_c()
 {
+	#if(LOG_ENSY==1)
 	sprintf(buff,"item ~ : %p %p %s",this,loc,loc);
-	map + buff;
+	LOG();
+	#endif
+	
+	
 	in=NULL;
 	out=NULL;
 	loc=NULL;
@@ -56,8 +68,11 @@ void item_c::set(const char * strptr)
 		printf("\nmallloc error");fflush(stdout);
 	}
 	
+	#if(LOG_ENSY==1)
 	sprintf(buff,"item < : %p %p %s",this,loc,loc);
-	map + buff;
+	LOG();
+	#endif
+
 }
 /*
 void item_c::operator = (const char* strptr)
@@ -97,7 +112,9 @@ strlist_c::strlist_c()
 {
 	head=(item *)malloc(sizeof(item*));
 	tail=(item *)malloc(sizeof(item*));
+	#if(L_TYPE==ARRAY_TYPE)
 	list=(item **)malloc(sizeof(item**));
+	#endif
 	count=0;
 }
 strlist_c::~strlist_c()
@@ -107,7 +124,6 @@ void strlist_c::probe()
 {
 	printf("strlist probe\nh:%p t:%p\n",head,tail);
 }
-
 #if(L_TYPE==LINK_LIST)
 void strlist_c::push(const char * str)
 {
