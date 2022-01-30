@@ -101,6 +101,15 @@ strlist_c::strlist_c()
 }
 strlist_c::~strlist_c()
 {
+	item * temp=nullptr;
+	temp=tail;
+	while(temp!=nullptr)
+	{
+	temp=tail->in;
+	tail->~item();
+	tail=temp;
+	}
+
 }
 void strlist_c::probe()
 {
@@ -108,7 +117,12 @@ void strlist_c::probe()
 }
 void strlist_c::push(const char * _str)
 {
+	#if(LOG_ENSY==1)
+	MEM_MAPS("<PUSH>");
+	#endif
+	
 	item * temp=nullptr;
+	temp=(item*)malloc(sizeof(item));
 	if(ListCount==0)
 	{
 		head->set(_str);
@@ -119,27 +133,66 @@ void strlist_c::push(const char * _str)
 	else if(ListCount==1)
 	{
 		tail->set(_str);
+		head->out=tail;
 		tail->in=head;
 		tail->out=nullptr;
 		ListCount=2;
 	}
 	else
 	{
+		tail->out=temp;
 		temp->set(_str);
 		temp->in=tail;
 		temp->out=nullptr;
 		tail=temp;
 		ListCount++;
 	}
+	#if(LOG_ENSY==1)
+	MEM_MAPS("</PUSH>");
+	#endif
+	
+	
 }
 void strlist_c::show()
 {
 	item * temp;
-	temp=head;
+	temp=tail;
 
-	while(temp->in!=nullptr)
+	while(temp!=nullptr)
 	{
 		temp->probe();
 		temp=temp->in;
+	}
+}
+item * strlist::get(uint idx)
+{
+	if(idx==0) return head;
+	else if(idx>0 && idx<=ListCount)
+	{
+		uint count=0;
+		item * temp;
+		temp=head;
+		while(count<idx)
+		{
+			temp=temp->out;
+			count++;
+		}
+		return temp;
+	}
+}
+item * strlist::getI(uint idx)
+{
+	if(idx==0) return tail;
+	else if(idx>0 && idx<=ListCount)
+	{
+		uint count=0;
+		item * temp;
+		temp=tail;
+		while(count<idx)
+		{
+			temp=temp->in;
+			count++;
+		}
+		return temp;
 	}
 }

@@ -31,6 +31,9 @@ class strlist_c{
 		void push(const char *);
 		void probe();
 		void show();
+		item_c * get(uint index);
+		item_c * getI(uint index);
+
 };
 typedef class strlist_c strlist; 
 uint strlen(const char *);

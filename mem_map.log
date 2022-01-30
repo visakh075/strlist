@@ -1,0 +1,84 @@
+<PUSH>
+item < : 0x7f87e0d00000 0x7f87e0d00060 Lorem
+</PUSH>
+<PUSH>
+item < : 0x7f87e0d00020 0x7f87e0d00090 ipsum
+</PUSH>
+<PUSH>
+item < : 0x7f87e0d000a0 0x7f87e0d000c0 dolor
+</PUSH>
+<PUSH>
+item < : 0x7f87e0d000d0 0x7f87e0d000f0 sit
+</PUSH>
+<PUSH>
+item < : 0x7f87e0d00100 0x7f87e0d00120 amet,
+</PUSH>
+<PUSH>
+item < : 0x7f87e0d00130 0x7f87e0d00150 consectetur
+</PUSH>
+<PUSH>
+item < : 0x7f87e0d00160 0x7f87e0d00180 adipiscing
+</PUSH>
+<PUSH>
+item < : 0x7f87e0d00190 0x7f87e0d001b0 elit.
+</PUSH>
+<PUSH>
+item < : 0x7f87e0d001c0 0x7f87e0d001e0 Vestibulum
+</PUSH>
+<PUSH>
+item < : 0x7f87e0d001f0 0x7f87e0d00210 elit
+</PUSH>
+<srch>
+up [0]0x7f87e0d00000
+dn [10]0x0
+</srch>
+<srch>
+up [1]0x7f87e0d00020
+dn [9]0x7f87e0d00000
+</srch>
+<srch>
+up [2]0x7f87e0d000a0
+dn [8]0x7f87e0d00020
+</srch>
+<srch>
+up [3]0x7f87e0d000d0
+dn [7]0x7f87e0d000a0
+</srch>
+<srch>
+up [4]0x7f87e0d00100
+dn [6]0x7f87e0d000d0
+</srch>
+<srch>
+up [5]0x7f87e0d00130
+dn [5]0x7f87e0d00100
+</srch>
+<srch>
+up [6]0x7f87e0d00160
+dn [4]0x7f87e0d00130
+</srch>
+<srch>
+up [7]0x7f87e0d00190
+dn [3]0x7f87e0d00160
+</srch>
+<srch>
+up [8]0x7f87e0d001c0
+dn [2]0x7f87e0d00190
+</srch>
+<srch>
+up [9]0x7f87e0d001f0
+dn [1]0x7f87e0d001c0
+</srch>
+<srch>
+up [10]0x0
+dn [0]0x7f87e0d001f0
+</srch>
+item ~ : 0x7f87e0d001f0 0x7f87e0d00210 elit
+item ~ : 0x7f87e0d001c0 0x7f87e0d001e0 Vestibulum
+item ~ : 0x7f87e0d00190 0x7f87e0d001b0 elit.
+item ~ : 0x7f87e0d00160 0x7f87e0d00180 adipiscing
+item ~ : 0x7f87e0d00130 0x7f87e0d00150 consectetur
+item ~ : 0x7f87e0d00100 0x7f87e0d00120 amet,
+item ~ : 0x7f87e0d000d0 0x7f87e0d000f0 sit
+item ~ : 0x7f87e0d000a0 0x7f87e0d000c0 dolor
+item ~ : 0x7f87e0d00020 0x7f87e0d00090 ipsum
+item ~ : 0x7f87e0d00000 0x7f87e0d00060 Lorem

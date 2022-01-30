@@ -5,7 +5,7 @@
 
 #define TEST_N1 1
 #define TEST_N2 2
-#define TEST_NX 200
+#define TEST_NX 10
 
 
 #include<stdio.h>
@@ -13,7 +13,7 @@
 #include "lib_strlist.h"
 #include "lib_rtlog.h"
 #include "dummy.h"
-rtlog log=rtlog("result",APPEND);
+rtlog log=rtlog("result.log",APPEND);
 int main()
 {
 	
@@ -40,10 +40,21 @@ int main()
 	for (size_t i = 0; i < TEST_NX; i++)
 	{
 		listx.push(dummy[i]);
-		log + dummy[i];
 	}
 	listx.show();
-	#endif
 
+	for (size_t i = 0; i <=TEST_NX; i++)
+	{
+		#if(LOG_ENSY==1)
+		MEM_MAPS("<srch>");
+		sprintf(buff,"up [%lu]%p",i,listx.get(i));
+		LOG();
+		sprintf(buff,"dn [%lu]%p",listx.ListCount-i,listx.getI(listx.ListCount-i));
+		LOG();
+		MEM_MAPS("</srch>");
+		#endif
+
+	}
+	#endif
 	return 0;
 }
