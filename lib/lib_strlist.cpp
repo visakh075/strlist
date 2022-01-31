@@ -35,8 +35,25 @@ item::item_c(const char * _str)
 item::item_c()
 {
 	in=(item_c *)malloc(sizeof(item_c));
+	if(in==NULL)
+	{
+		MEM_MAPS("memmory allocation error");
+	}
 	out=(item_c *)malloc(sizeof(item_c));
+	if(out=NULL)
+	{
+		#if(LOG_ENSY==1)
+		MEM_MAPS("memmory allocation error");
+		#endif
+	}
+
 	loc=(char *)malloc(sizeof(char));
+	if(loc==NULL)
+	{
+		#if(LOG_ENSY==1)
+		MEM_MAPS("memmory allocation error");
+		#endif
+	}
 	len=0;
 
 	#if(LOG_ENSY==1)
@@ -69,9 +86,10 @@ void item::set(const char * strptr)
 	}
 	else
 	{
-		printf("\nmallloc error");fflush(stdout);
+		#if(LOG_ENSY==1)
+		MEM_MAPS("memmory re-allocation error");
+		#endif
 	}
-	
 	#if(LOG_ENSY==1)
 	sprintf(buff,"item < : %p %p %s",this,loc,loc);
 	LOG();
@@ -108,7 +126,15 @@ item * item::push(const char * _str)
 strlist::strlist_c()
 {
 	head=(item *)malloc(sizeof(item));
+	#if(LOG_ENSY==1)
+	MEM_MAPS("memmory allocation head");
+	#endif
+
 	tail=(item *)malloc(sizeof(item));
+	#if(LOG_ENSY==1)
+	MEM_MAPS("memmory allocation tail");
+	#endif
+
 	ListCount=0;
 }
 strlist::~strlist_c()
