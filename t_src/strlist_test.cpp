@@ -5,7 +5,7 @@
 
 #define TEST_N1 1
 #define TEST_N2 2
-#define TEST_NX 100
+#define TEST_NX 2
 
 #include<stdio.h>
 #include<stdlib.h>

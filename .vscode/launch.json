@@ -6,7 +6,7 @@
     "configurations": [
       {
         "name": "Test Debug Active",
-        "type": "lldb",
+        "type": "gdb",
         "request": "launch",
         "program": "${workspaceFolder}/t_bin/${fileBasenameNoExtension}",
         "args": [],
@@ -14,7 +14,7 @@
         "cwd": "${workspaceFolder}",
         "environment": [],
         "externalConsole": false,
-        "MIMode": "lldb",
+        "MIMode": "gdb",
         "preLaunchTask": "Build Tests"
       }
     ]

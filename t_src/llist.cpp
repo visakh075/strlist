@@ -49,7 +49,9 @@ int main()
 		list2.push(dummy[i]);
 	}
 	#endif
+	#if(LOG_ENSY==1)
 	MEM_MAPS("INSERT >>");
+	#endif
 	#if(TEST_NX_EN==1)
 	for (size_t i = 0; i < TEST_NX; i++)
 	{
@@ -65,8 +67,10 @@ int main()
 		#endif
 
 	}
+	#if(LOG_ENSY==1)
 	MEM_MAPS("INSERT <<");
 	MEM_MAPS("PROBE >>");
+	#endif
 	for (size_t i = 0; i < TEST_NX; i++)
 	{
 		#if(LOG_ENSY==1)
@@ -78,7 +82,9 @@ int main()
 		llist->probe();
 		
 	}
-	MEM_MAPS("PROBE <<");	
+	#if(LOG_ENSY==1)
+	MEM_MAPS("PROBE <<");
+	#endif	
 	#endif
 
 	return 0;

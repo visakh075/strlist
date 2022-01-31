@@ -37,7 +37,9 @@ item::item_c()
 	in=(item_c *)malloc(sizeof(item_c));
 	if(in==NULL)
 	{
+		#if(LOG_ENSY==1)
 		MEM_MAPS("memmory allocation error");
+		#endif
 	}
 	out=(item_c *)malloc(sizeof(item_c));
 	if(out=NULL)
@@ -67,7 +69,10 @@ item::~item_c()
 	sprintf(buff,"item ~ : %p %p %s",this,loc,loc);
 	LOG();
 	#endif
-		
+	
+	//free(in);
+	//free(out);
+	free(loc);
 	in=nullptr;
 	out=nullptr;
 	loc=nullptr;
@@ -139,14 +144,16 @@ strlist::strlist_c()
 }
 strlist::~strlist_c()
 {
-	item * temp =nullptr;
+	
 	if(ListCount==1)
 	{
+		//free(head->loc);
 		head->~item_c();
 		free(head);
 	}
 	else if (ListCount==2)
 	{
+		//free(head->loc);free(tail->loc);
 		tail->~item_c();
 		head->~item_c();
 		free(tail);
@@ -154,6 +161,7 @@ strlist::~strlist_c()
 	}
 	else
 	{
+		item * temp =nullptr;
 		temp=tail;
 		item * x_temp;
 		while(temp!=nullptr)
@@ -207,7 +215,7 @@ void strlist::push(const char * _str)
 }
 void strlist::show()
 {
-	item * temp;
+	
 	if(ListCount==0)
 	{
 
@@ -218,6 +226,7 @@ void strlist::show()
 	}
 	else
 	{
+		item * temp=nullptr;
 		temp=head;
 		while(temp!=nullptr)
 		{

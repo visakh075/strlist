@@ -1,5 +1,5 @@
-#ifndef _RTLOG_
-#define _RTLOG_
+#ifndef __rtlog__
+#define __rtlog__
 #include<stdio.h>
 #define N_MODE "wb"
 #define A_MODE "ab"
@@ -24,8 +24,7 @@ public:
     void close();
     void operator << (char const *);
     void operator + (char const *);
+    
 };
-
-
 typedef class c_rtlog rtlog;
 #endif
