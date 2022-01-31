@@ -5,7 +5,7 @@
 
 #define TEST_N1 1
 #define TEST_N2 2
-#define TEST_NX 10
+#define TEST_NX 1
 
 
 #include<stdio.h>
@@ -16,25 +16,6 @@
 rtlog log=rtlog("result.log",APPEND);
 int main()
 {
-	
-	#if(TEST_N1_EN==1)
-	strlist list1;
-	for (size_t i = 0; i < TEST_N1; i++)
-	{
-		list1.push(dummy[i]);
-	}
-	// list1.show();
-	#endif
-
-	#if(TEST_N2_EN==1)	
-	strlist list2;
-	for (size_t i = 0; i < TEST_N2; i++)
-	{
-		list2.push(dummy[i]);
-	}
-	// list2.show();
-	#endif
-
 	#if(TEST_NX_EN==1)
 	strlist listx;
 	for (size_t i = 0; i < TEST_NX; i++)
@@ -46,12 +27,12 @@ int main()
 	for (size_t i = 0; i <=TEST_NX; i++)
 	{
 		#if(LOG_ENSY==1)
-		MEM_MAPS("<srch>");
-		sprintf(buff,"up [%lu]%p",i,listx.get(i));
-		LOG();
-		sprintf(buff,"dn [%lu]%p",listx.ListCount-i,listx.getI(listx.ListCount-i));
-		LOG();
-		MEM_MAPS("</srch>");
+		//MEM_MAPS("<srch>");
+		// sprintf(buff,"strlist $ [%lu]%p",i,listx.get(i));
+		// LOG();
+		// sprintf(buff,"strlist $ [%lu]%p",listx.ListCount-i,listx.getI(listx.ListCount-i));
+		// LOG();
+		//MEM_MAPS("</srch>");
 		#endif
 
 	}

@@ -1,19 +1,20 @@
-
 #include "config.h"
 #include "lib_strlist.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include "lib_rtlog.h"
 #include <cstddef>
-//	DEBUG >>
+
+//	DEBUG >>>
 	// Definition
 	#if(LOG_ENSY==1)
 	rtlog map=rtlog(LOG_FILE,NORMAL);
 	char buff[LOG_BUFF_SZ];
 	#define LOG() map + buff
 	#endif
-//	DEBUG <<
+//	DEBUG <<<
 
+// EXTRA >>>
 uint strlen(const char * strptr)
 {
 	uint retVal=0;
@@ -24,11 +25,14 @@ void strcpy(const char * frm,char * to)
 {
 	while(*to++=*frm++);
 }
-item_c::item_c(const char * _str)
+// EXTRA <<<
+
+// ITEM >>>
+item::item_c(const char * _str)
 {
 	set(_str);
 }
-item_c::item_c()
+item::item_c()
 {
 	in=(item_c *)malloc(sizeof(item_c));
 	out=(item_c *)malloc(sizeof(item_c));
@@ -40,7 +44,7 @@ item_c::item_c()
 	LOG();
 	#endif
 }
-item_c::~item_c()
+item::~item_c()
 {
 	#if(LOG_ENSY==1)
 	sprintf(buff,"item ~ : %p %p %s",this,loc,loc);
@@ -52,7 +56,7 @@ item_c::~item_c()
 	loc=nullptr;
 
 }
-void item_c::set(const char * strptr)
+void item::set(const char * strptr)
 {
 	loc=nullptr;
 	
@@ -73,52 +77,77 @@ void item_c::set(const char * strptr)
 	LOG();
 	#endif
 }
-
-void item_c::probe()
+void item::probe()
 {
 	printf("\np:%p l:%p [i:%p o:%p] %s",this,loc,in,out,loc);
 }
-
-item_c* item_c::push(const char * _str)
+void item::con_tail(item * _tail)
 {
-	MEM_MAPS("PUSH >>");
+	out=_tail;
+	_tail->in=this;
+}
+void item::con_head(item * _head)
+{
+	in=_head;
+	_head->out=this;
+}
+item * item::push(const char * _str)
+{
 	item_c* temp;
 	temp=(item_c *) malloc(sizeof(item));
 	temp->set(_str);
 	
 	out=nullptr;
 	temp->out=this;
-	MEM_MAPS("<<PUSH");
 	return temp;
 
 }
-// STRLIST
-strlist_c::strlist_c()
+// ITEM <<<
+
+// STRLIST >>>
+strlist::strlist_c()
 {
 	head=(item *)malloc(sizeof(item));
 	tail=(item *)malloc(sizeof(item));
 	ListCount=0;
 }
-strlist_c::~strlist_c()
+strlist::~strlist_c()
 {
-	item * temp=nullptr;
-	temp=tail;
-	while(temp!=nullptr)
+	item * temp =nullptr;
+	if(ListCount==1)
 	{
-	temp=tail->in;
-	tail->~item();
-	tail=temp;
+		head->~item_c();
+		free(head);
 	}
+	else if (ListCount==2)
+	{
+		tail->~item_c();
+		head->~item_c();
+		free(tail);
+		free(head);
+	}
+	else
+	{
+		temp=tail;
+		item * x_temp;
+		while(temp!=nullptr)
+		{
+			x_temp=temp->in;
+			temp->~item_c();
+			free(temp);
+			temp=x_temp;
+		}
 
+	}
 }
-void strlist_c::probe()
+void strlist::probe()
 {
 	printf("strlist probe\nh:%p t:%p\n",head,tail);
 }
-void strlist_c::push(const char * _str)
+void strlist::push(const char * _str)
 {
 	#if(LOG_ENSY==1)
-	MEM_MAPS("<PUSH>");
+	//MEM_MAPS("<PUSH>");
 	#endif
 	
 	item * temp=nullptr;
@@ -133,35 +162,42 @@ void strlist_c::push(const char * _str)
 	else if(ListCount==1)
 	{
 		tail->set(_str);
-		head->out=tail;
-		tail->in=head;
+		head->con_tail(tail);
 		tail->out=nullptr;
 		ListCount=2;
 	}
 	else
 	{
-		tail->out=temp;
 		temp->set(_str);
-		temp->in=tail;
-		temp->out=nullptr;
+		tail->con_tail(temp);
 		tail=temp;
 		ListCount++;
 	}
 	#if(LOG_ENSY==1)
-	MEM_MAPS("</PUSH>");
+	//MEM_MAPS("</PUSH>");
 	#endif
 	
 	
 }
-void strlist_c::show()
+void strlist::show()
 {
 	item * temp;
-	temp=tail;
-
-	while(temp!=nullptr)
+	if(ListCount==0)
 	{
-		temp->probe();
-		temp=temp->in;
+
+	}
+	else if(ListCount==1)
+	{
+		head->probe();
+	}
+	else
+	{
+		temp=head;
+		while(temp!=nullptr)
+		{
+			temp->probe();
+			temp=temp->out;
+		}
 	}
 }
 item * strlist::get(uint idx)
@@ -196,3 +232,4 @@ item * strlist::getI(uint idx)
 		return temp;
 	}
 }
+// STRLIST <<<

@@ -16,9 +16,9 @@ class item_c{
 		void set(const char *);
 		void reset(const char *);
 		void probe();
-		void connect(item_c *,item_c *);
-		void set_out(item_c *);
-		void set_in(item_c *);
+		//void connect(item_c *,item_c *);
+		void con_tail(item_c *);
+		void con_head(item_c *);
 		item_c* push(const char *);
 };
 typedef class item_c item;
