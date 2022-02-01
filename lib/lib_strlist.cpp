@@ -145,13 +145,7 @@ strlist::strlist_c()
 strlist::~strlist_c()
 {
 	
-	if(ListCount==1)
-	{
-		//free(head->loc);
-		head->~item_c();
-		free(head);
-	}
-	else if (ListCount==2)
+	if (ListCount<3)
 	{
 		//free(head->loc);free(tail->loc);
 		tail->~item_c();
@@ -210,7 +204,7 @@ void strlist::push(const char * _str)
 	#if(LOG_ENSY==1)
 	//MEM_MAPS("</PUSH>");
 	#endif
-	
+	free(temp);
 	
 }
 void strlist::show()
