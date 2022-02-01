@@ -21,9 +21,10 @@ LIBS_SRC = $(wildcard $(LIB_PATH)*.cpp)
 LIBS_OBJ = $(patsubst $(LIB_PATH)%.cpp,$(OBJ_PATH)%.o,$(LIBS_SRC))
 EXT_OBJ=$(wildcard $(EXT_LIB_PATH)*.o)
 # GENERATOR MAKE FUNCTIONS
-all : all_msg bins libs tests
+all : all_msg libs bins tests
+all_no_msg : bin_dirs $(LIBS_OBJ) $(MAIN_BIN) $(TST_BIN)
 all_msg :
-	clear
+
 init : init_msg src_dirs
 init_msg :
 	@echo
@@ -58,18 +59,19 @@ tests_msg :
 	@echo - Files: $(TST_BIN)
 
 clean:
-	rm -rf $(OBJ_PATH) $(TST_BIN_PATH) $(MAIN_BIN_PATH)
-
+	@rm -rf $(OBJ_PATH) $(TST_BIN_PATH) $(MAIN_BIN_PATH)
+clean_tests:
+	@rm -rf $(TST_BIN_PATH)
 # GENERATOR RULES -COMPILING
 
 # -libraries
 $(OBJ_PATH)%.o : $(LIB_PATH)%.cpp
-	$(CC_CPP) $(FLG) -c $< -o $@ -I $(EXT_LIB_PATH)
+	@$(CC_CPP) $(FLG) -c $< -o $@ -I $(EXT_LIB_PATH)
 
 # -tests
 $(TST_BIN_PATH)% : $(TST_SRC_PATH)%.cpp $(LIBS_OBJ)
-	$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH)
+	@$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH)
 
 # -main
 $(MAIN_BIN_PATH)% : $(MAIN_SRC_PATH)%.cpp $(LIBS_OBJ)
-	$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH)
+	@$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH)

@@ -178,8 +178,6 @@ void strlist::push(const char * _str)
 	//MEM_MAPS("<PUSH>");
 	#endif
 	
-	item * temp=nullptr;
-	temp=(item*)malloc(sizeof(item));
 	if(ListCount==0)
 	{
 		head->set(_str);
@@ -196,6 +194,9 @@ void strlist::push(const char * _str)
 	}
 	else
 	{
+		item * temp=nullptr;
+		temp=(item*)malloc(sizeof(item));
+	
 		temp->set(_str);
 		tail->con_tail(temp);
 		tail=temp;
@@ -204,7 +205,7 @@ void strlist::push(const char * _str)
 	#if(LOG_ENSY==1)
 	//MEM_MAPS("</PUSH>");
 	#endif
-	free(temp);
+	//free(temp);
 	
 }
 void strlist::show()

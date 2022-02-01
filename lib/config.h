@@ -3,7 +3,7 @@
 #define ARRAY_TYPE 123
 #define LINK_LIST 456
 #define L_TYPE LINK_LIST
-#define LOG_ENSY 0
+#define LOG_ENSY 1
 #define LOG_BUFF_SZ 100
 #define LOG_FILE "mem_map.log"
 //  DEBUG >>

@@ -1,0 +1,82 @@
+==============================Test for 0==============================
+==20104== Conditional jump or move depends on uninitialised value(s)
+==20104==    at 0x4BD3580: vfprintf (vfprintf.c:1637)
+==20104==    by 0x4BF5320: vsprintf (iovsprintf.c:42)
+==20104==    by 0x4BDB773: sprintf (sprintf.c:32)
+==20104==    by 0x401919: item_c::~item_c() (lib_strlist.cpp:69)
+==20104==    by 0x401B6A: strlist_c::~strlist_c() (lib_strlist.cpp:151)
+==20104==    by 0x401398: main (strlist_test.cpp:41)
+==20104== 
+==20104== Conditional jump or move depends on uninitialised value(s)
+==20104==    at 0x4BD3170: vfprintf (vfprintf.c:1638)
+==20104==    by 0x4BF5320: vsprintf (iovsprintf.c:42)
+==20104==    by 0x4BDB773: sprintf (sprintf.c:32)
+==20104==    by 0x401919: item_c::~item_c() (lib_strlist.cpp:69)
+==20104==    by 0x401B6A: strlist_c::~strlist_c() (lib_strlist.cpp:151)
+==20104==    by 0x401398: main (strlist_test.cpp:41)
+==20104== 
+==20104== Conditional jump or move depends on uninitialised value(s)
+==20104==    at 0x4836961: free (vg_replace_malloc.c:530)
+==20104==    by 0x40193F: item_c::~item_c() (lib_strlist.cpp:75)
+==20104==    by 0x401B6A: strlist_c::~strlist_c() (lib_strlist.cpp:151)
+==20104==    by 0x401398: main (strlist_test.cpp:41)
+==20104== 
+==20104== Conditional jump or move depends on uninitialised value(s)
+==20104==    at 0x4836961: free (vg_replace_malloc.c:530)
+==20104==    by 0x40193F: item_c::~item_c() (lib_strlist.cpp:75)
+==20104==    by 0x401B76: strlist_c::~strlist_c() (lib_strlist.cpp:152)
+==20104==    by 0x401398: main (strlist_test.cpp:41)
+==20104== 
+======================================================================
+==============================Test for 1==============================
+==20154== Conditional jump or move depends on uninitialised value(s)
+==20154==    at 0x4BD3580: vfprintf (vfprintf.c:1637)
+==20154==    by 0x4BF5320: vsprintf (iovsprintf.c:42)
+==20154==    by 0x4BDB773: sprintf (sprintf.c:32)
+==20154==    by 0x401919: item_c::~item_c() (lib_strlist.cpp:69)
+==20154==    by 0x401B6A: strlist_c::~strlist_c() (lib_strlist.cpp:151)
+==20154==    by 0x401398: main (strlist_test.cpp:41)
+==20154== 
+==20154== Conditional jump or move depends on uninitialised value(s)
+==20154==    at 0x4BD3170: vfprintf (vfprintf.c:1638)
+==20154==    by 0x4BF5320: vsprintf (iovsprintf.c:42)
+==20154==    by 0x4BDB773: sprintf (sprintf.c:32)
+==20154==    by 0x401919: item_c::~item_c() (lib_strlist.cpp:69)
+==20154==    by 0x401B6A: strlist_c::~strlist_c() (lib_strlist.cpp:151)
+==20154==    by 0x401398: main (strlist_test.cpp:41)
+==20154== 
+==20154== Conditional jump or move depends on uninitialised value(s)
+==20154==    at 0x4836961: free (vg_replace_malloc.c:530)
+==20154==    by 0x40193F: item_c::~item_c() (lib_strlist.cpp:75)
+==20154==    by 0x401B6A: strlist_c::~strlist_c() (lib_strlist.cpp:151)
+==20154==    by 0x401398: main (strlist_test.cpp:41)
+==20154== 
+======================================================================
+==============================Test for 2==============================
+======================================================================
+==============================Test for 3==============================
+==20268== Conditional jump or move depends on uninitialised value(s)
+==20268==    at 0x4BD3580: vfprintf (vfprintf.c:1637)
+==20268==    by 0x4BDB605: printf (printf.c:33)
+==20268==    by 0x4019A9: item_c::probe() (lib_strlist.cpp:105)
+==20268==    by 0x401D98: strlist_c::show() (lib_strlist.cpp:228)
+==20268==    by 0x40135A: main (strlist_test.cpp:25)
+==20268== 
+==20268== Conditional jump or move depends on uninitialised value(s)
+==20268==    at 0x401D8A: strlist_c::show() (lib_strlist.cpp:226)
+==20268==    by 0x40135A: main (strlist_test.cpp:25)
+==20268== 
+======================================================================
+==============================Test for 5==============================
+==20328== Conditional jump or move depends on uninitialised value(s)
+==20328==    at 0x4BD3580: vfprintf (vfprintf.c:1637)
+==20328==    by 0x4BDB605: printf (printf.c:33)
+==20328==    by 0x4019A9: item_c::probe() (lib_strlist.cpp:105)
+==20328==    by 0x401D98: strlist_c::show() (lib_strlist.cpp:228)
+==20328==    by 0x40135A: main (strlist_test.cpp:25)
+==20328== 
+==20328== Conditional jump or move depends on uninitialised value(s)
+==20328==    at 0x401D8A: strlist_c::show() (lib_strlist.cpp:226)
+==20328==    by 0x40135A: main (strlist_test.cpp:25)
+==20328== 
+======================================================================

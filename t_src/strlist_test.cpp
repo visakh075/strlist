@@ -1,11 +1,12 @@
-#define TEST_N1_EN 0
-#define TEST_N2_EN 0
+#include "test_spec.h"
+
+#ifndef TEST_NX_EN
 #define TEST_NX_EN 1
+#endif
 
-
-#define TEST_N1 1
-#define TEST_N2 2
+#ifndef TEST_NX
 #define TEST_NX 10
+#endif
 
 #include<stdio.h>
 #include<stdlib.h>
