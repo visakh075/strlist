@@ -31,7 +31,7 @@ all : all_msg libs bins tests
 all_no_msg : bin_dirs $(LIBS_OBJ) $(MAIN_BIN) $(TST_BIN)
 all_msg :
 
-init : src_dirs init_msg
+init : src_dirs init_msg readme
 init_msg :
 	@echo
 	@echo " Project init"
@@ -42,17 +42,16 @@ init_msg :
 	@echo "  "$(MAIN_SRC_PATH)
 	@echo "  "$(EXT_LIB_PATH)
 	@echo
-	@echo "put your library source files \nhere eg: libXXX.cpp libXXX.h\noutput files will be generated at "$(OBJ_PATH) > $(LIB_PATH)/read_me.txt
-	@echo "put your test codes here\noutputs will be generated at "$(TST_BIN_PATH) > $(TST_SRC_PATH)/read_me.txt
-	@echo "put your source codes here\noutputs will be generated at "$(MAIN_BIN_PATH) > $(MAIN_SRC_PATH)/read_me.txt
 	
 bin_dirs :
 	@mkdir -p $(OBJ_PATH) $(TST_BIN_PATH) $(MAIN_BIN_PATH)
 src_dirs :
 	@mkdir -p $(LIB_PATH) $(TST_SRC_PATH) $(MAIN_SRC_PATH)
 
-readme : 
-	@echo "sfsdfsdfs">readme
+readme :
+	@echo "put your library source files \nhere eg: libXXX.cpp libXXX.h\noutput files will be generated at "$(OBJ_PATH) > $(LIB_PATH)/read_me.txt
+	@echo "put your test codes here\noutputs will be generated at "$(TST_BIN_PATH) > $(TST_SRC_PATH)/read_me.txt
+	@echo "put your source codes here\noutputs will be generated at "$(MAIN_BIN_PATH) > $(MAIN_SRC_PATH)/read_me.txt
 
 bins : bin_msg bin_dirs $(MAIN_BIN)
 bin_msg :
@@ -89,14 +88,14 @@ clean_tests:
 # LIBRARIES
 $(OBJ_PATH)%.o : $(LIB_PATH)%.cpp $(LIBS_HDR)
 	@echo " > "$<
-	@$(CC_CPP) $(FLG) -c $< -o $@ -I $(EXT_LIB_PATH) > build.log
+	@$(CC_CPP) $(FLG) -c $< -o $@ -I $(EXT_LIB_PATH)
 
 # TESTS
 $(TST_BIN_PATH)% : $(TST_SRC_PATH)%.cpp $(LIBS_OBJ)
 	@echo " > "$<
-	@$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH) >> build.log
+	@$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH)
 
 # MAIN
 $(MAIN_BIN_PATH)% : $(MAIN_SRC_PATH)%.cpp $(LIBS_OBJ)
 	@echo " > "$<
-	@$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH) >> build.log
+	@$(CC_CPP) $(FLG) -o $@ $^ $(EXT_OBJ) -I $(LIB_PATH) -I $(EXT_LIB_PATH)
