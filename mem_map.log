@@ -1,9 +1,9 @@
 
 memmory allocation head
 memmory allocation tail
-item < : 0x213b2d0 0x213c340 Lorem
-item < : 0x213c310 0x213c360 ipsum
-item < : 0x213c380 0x213c3b0 dolor
-item ~ : 0x213c380 0x213c3b0 dolor
-item ~ : 0x213c310 0x213c360 ipsum
-item ~ : 0x213b2d0 0x213c340 Lorem
+item < : 0x4d5b160 0x4d5c260 Lorem
+item < : 0x4d5c200 0x4d5c2b0 ipsum
+item < : 0x4d5c300 0x4d5c360 dolor
+item ~ : 0x4d5c300 0x4d5c360 dolor
+item ~ : 0x4d5c200 0x4d5c2b0 ipsum
+item ~ : 0x4d5b160 0x4d5c260 Lorem
