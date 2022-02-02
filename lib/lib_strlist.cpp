@@ -23,7 +23,7 @@ uint strlen(const char * strptr)
 }
 void strcpy(const char * frm,char * to)
 {
-	while(*to++=*frm++){};
+	while((*to++=*frm++)){};
 }
 // EXTRA <<<
 
