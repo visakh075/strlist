@@ -23,7 +23,7 @@ uint strlen(const char * strptr)
 }
 void strcpy(const char * frm,char * to)
 {
-	while(*to++=*frm++);
+	while((*to++=*frm++)){};
 }
 // EXTRA <<<
 
@@ -42,7 +42,7 @@ item::item_c()
 		#endif
 	}
 	out=(item_c *)malloc(sizeof(item_c));
-	if(out=NULL)
+	if(out==NULL)
 	{
 		#if(LOG_ENSY==1)
 		MEM_MAPS("memmory allocation error");
@@ -245,6 +245,7 @@ item * strlist::get(uint idx)
 		}
 		return temp;
 	}
+	return nullptr;
 }
 item * strlist::getI(uint idx)
 {
@@ -261,5 +262,6 @@ item * strlist::getI(uint idx)
 		}
 		return temp;
 	}
+	return nullptr;
 }
 // STRLIST <<<
