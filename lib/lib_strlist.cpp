@@ -69,14 +69,11 @@ item::~item_c()
 	sprintf(buff,"item ~ : %p %p %s",this,loc,loc);
 	LOG();
 	#endif
-	
-	//free(in);
-	//free(out);
+
 	free(loc);
 	in=nullptr;
 	out=nullptr;
 	loc=nullptr;
-
 }
 void item::set(const char * strptr)
 {

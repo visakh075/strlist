@@ -5,7 +5,7 @@
 #define L_TYPE LINK_LIST
 #define LOG_ENSY 1
 #define LOG_BUFF_SZ 100
-#define LOG_FILE "mem_map.log"
+#define LOG_FILE "strlist_map.log"
 //  DEBUG >>
     #include "lib_rtlog.h"
     #if(LOG_ENSY==1)

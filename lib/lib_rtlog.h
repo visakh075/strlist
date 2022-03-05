@@ -1,6 +1,6 @@
 #ifndef __rtlog__
 #define __rtlog__
-#include<stdio.h>
+#include <stdio.h>
 #define N_MODE "wb"
 #define A_MODE "ab"
 

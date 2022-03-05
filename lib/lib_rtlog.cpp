@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "lib_rtlog.h"
 c_rtlog::c_rtlog(char const * _l_file)
 {
@@ -16,7 +16,7 @@ c_rtlog::~c_rtlog()
     fclose(log);
     // free(log);
 }
-void c_rtlog::operator<< (char const * str)
+void c_rtlog::operator << (char const * str)
 {
     fprintf(log,"\n%s",str);fflush(log);
 }
