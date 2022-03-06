@@ -23,8 +23,15 @@ public:
     void open(O_MODE l);
     void close();
     void operator << (char const *);
-    void operator + (char const *);
-    void operator + (int);
+    c_rtlog & operator + (char const *);
+    c_rtlog & operator + (int);
+    c_rtlog & operator + (double);
+    c_rtlog & operator + (long double);
+    c_rtlog & operator + (float);
+    c_rtlog & operator + (unsigned int);
+    c_rtlog & operator + (char);
+    c_rtlog & operator + (void *);
+    
     
 };
 typedef class c_rtlog rtlog;

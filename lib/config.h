@@ -11,24 +11,24 @@
     #if(LOG_ENSY==1)
         extern rtlog map;
         extern char buff[LOG_BUFF_SZ];
-        #define LOG() map + buff
+        #define LOG() map << buff
         // Wrappper
-        #define LOG_STR(x) ({sprintf(buff,x);map+buff;})
+        #define LOG_STR(x) ({map<<x;})
         #define LOG_ITM_INIT() {\
             sprintf(buff,"item * : %p %p",this,loc);\
-            map + buff;\
+            map<<buff;\
         }
         #define LOG_ITM_SET() {\
             sprintf(buff,"item < : %p %p %s",this,loc,loc);\
-            map + buff;\
+            map<<buff;\
         }
         #define LOG_ITM_PROBE() {\
             sprintf(buff,"item > : %p %p %s",this,loc,loc);\
-            map + buff;\
+            map<<buff;\
         }
         #define LOG_ITM_DEST() {\
             sprintf(buff,"item ~ : %p %p %s",this,loc,loc);\
-            map + buff;\
+            map<<buff;\
         }
     #else
         #define LOG()

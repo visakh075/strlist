@@ -20,15 +20,47 @@ void c_rtlog::operator << (char const * str)
 {
     fprintf(log,"%s\n",str);fflush(log);
 }
-void c_rtlog::operator + (char const * str)
+c_rtlog & c_rtlog::operator + (char const * str)
 {
     fprintf(log,"%s",str);fflush(log);
-}
-void c_rtlog::operator + (int _int)
-{
-    fprintf(log,"%d",_int);fflush(log);
+    return *this;
 }
 
+c_rtlog & c_rtlog::operator + (int _int)
+{
+    fprintf(log,"%d",_int);fflush(log);
+    return *this;
+}
+c_rtlog & c_rtlog::operator + (double _dbl)
+{
+    fprintf(log,"%lf",_dbl);fflush(log);
+    return *this;
+}
+c_rtlog & c_rtlog::operator + (long double _dbl)
+{
+    fprintf(log,"%Lf",_dbl);fflush(log);
+    return *this;
+}
+c_rtlog & c_rtlog::operator + (float _flt)
+{
+    fprintf(log,"%f",_flt);fflush(log);
+    return *this;
+}
+c_rtlog & c_rtlog::operator + (unsigned int _uint)
+{
+    fprintf(log,"%i",_uint);fflush(log);
+    return *this;
+}
+c_rtlog & c_rtlog::operator + (char c)
+{
+    fprintf(log,"%c",c);fflush(log);
+    return *this;
+}
+c_rtlog & c_rtlog::operator + (void * p)
+{
+    fprintf(log,"%p",p);fflush(log);
+    return *this;
+}
 void c_rtlog::open(O_MODE mode)
 {
     switch (mode)
