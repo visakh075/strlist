@@ -37,39 +37,26 @@ item::item_c()
 	in=(item_c *)malloc(sizeof(item_c));
 	if(in==NULL)
 	{
-		#if(LOG_ENSY==1)
-		MEM_MAPS("memmory allocation error");
-		#endif
+		LOG_STR("memmory allocation error");
 	}
 	out=(item_c *)malloc(sizeof(item_c));
 	if(out==NULL)
 	{
-		#if(LOG_ENSY==1)
-		MEM_MAPS("memmory allocation error");
-		#endif
+		LOG_STR("memmory allocation error");
 	}
 
 	loc=(char *)malloc(sizeof(char));
 	if(loc==NULL)
 	{
-		#if(LOG_ENSY==1)
-		MEM_MAPS("memmory allocation error");
-		#endif
+		LOG_STR("memmory allocation error");
 	}
 	len=0;
 
-	#if(LOG_ENSY==1)
-	sprintf(buff,"item * : %p %p",this,loc);
-	LOG();
-	#endif
+	LOG_ITM_INIT();
 }
 item::~item_c()
 {
-	#if(LOG_ENSY==1)
-	sprintf(buff,"item ~ : %p %p %s",this,loc,loc);
-	LOG();
-	#endif
-
+	LOG_ITM_DEST();
 	free(loc);
 	in=nullptr;
 	out=nullptr;
@@ -89,21 +76,13 @@ void item::set(const char * strptr)
 	}
 	else
 	{
-		#if(LOG_ENSY==1)
-		MEM_MAPS("memmory re-allocation error");
-		#endif
+		LOG_STR("memmory re-allocation error");
 	}
-	#if(LOG_ENSY==1)
-	sprintf(buff,"item < : %p %p %s",this,loc,loc);
-	LOG();
-	#endif
+	LOG_ITM_SET();
 }
 void item::probe()
 {
-	#if(LOG_ENSY==1)
-	sprintf(buff,"item > : %p %p %s",this,loc,loc);
-	LOG();
-	#endif
+	LOG_ITM_PROBE();
 	printf("\np:%p l:%p [i:%p o:%p] %s",this,loc,in,out,loc);
 }
 void item::con_tail(item * _tail)
@@ -132,16 +111,13 @@ item * item::push(const char * _str)
 // STRLIST >>>
 strlist::strlist_c()
 {
+	LOG_STR("strlist init");
 	head=(item *)malloc(sizeof(item));
-	#if(LOG_ENSY==1)
-	MEM_MAPS("memmory allocation head");
-	#endif
-
+	LOG_STR("memmory allocation head");
+	
 	tail=(item *)malloc(sizeof(item));
-	#if(LOG_ENSY==1)
-	MEM_MAPS("memmory allocation tail");
-	#endif
-
+	LOG_STR("memmory allocation tail");
+	
 	ListCount=0;
 }
 strlist::~strlist_c()
@@ -169,6 +145,7 @@ strlist::~strlist_c()
 		}
 
 	}
+	LOG_STR("strlist deleted");
 }
 void strlist::probe()
 {
@@ -176,9 +153,6 @@ void strlist::probe()
 }
 void strlist::push(const char * _str)
 {
-	#if(LOG_ENSY==1)
-	//MEM_MAPS("<PUSH>");
-	#endif
 	
 	if(ListCount==0)
 	{
@@ -204,10 +178,6 @@ void strlist::push(const char * _str)
 		tail=temp;
 		ListCount++;
 	}
-	#if(LOG_ENSY==1)
-	//MEM_MAPS("</PUSH>");
-	#endif
-	//free(temp);
 	
 }
 void strlist::show()
@@ -266,4 +236,12 @@ item * strlist::getI(uint idx)
 	}
 	return nullptr;
 }
-// STRLIST <<<
+item * strlist::operator[] (uint index)
+{
+	return getI(index);
+}
+void item::operator = (const char * strptr)
+{
+	set(strptr);
+}
+// STRLIST <<<1

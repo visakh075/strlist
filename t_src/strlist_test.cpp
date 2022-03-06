@@ -17,48 +17,41 @@ rtlog log=rtlog("result.log",APPEND);
 int main()
 {
 	#if(TEST_NX_EN==1)
+	
 	strlist listx;
 
-	#if(LOG_ENSY==1)
-		MEM_MAPS("initial push");
-	#endif
+
+	LOG_STR("initial push");
 	for (size_t i = 0; i < TEST_NX; i++)
 	{
 		listx.push(dummy[i]);
 	}
 
-	#if(LOG_ENSY==1)
-		MEM_MAPS("initial show");
-	#endif
+	LOG_STR("initial show");
 	listx.show();
 
-	#if(LOG_ENSY==1)
-		MEM_MAPS("replace");
-	#endif
-	
+	LOG_STR("replace");	
 	for (size_t i = 0; i < TEST_NX; i+=2)
 	{
-		listx.get(i)->set(dummy[TEST_NX+i]);
+		*listx[i]=dummy[TEST_NX+i];
 	}
 
-	#if(LOG_ENSY==1)
-		MEM_MAPS("replace show");
-	#endif
+	LOG_STR("replace show");
 	listx.show();
-
 
 	for (size_t i = 0; i <=TEST_NX; i++)
 	{
 		#if(LOG_ENSY==1)
-		// MEM_MAPS("<srch>");
-		// sprintf(buff,"strlist $ [%03lu]%p",i,listx.get(i));
-		// LOG();
-		// sprintf(buff,"strlist $ [%03lu]%p",listx.ListCount-i,listx.getI(listx.ListCount-i));
-		// LOG();
-		// MEM_MAPS("</srch>");
+
+		sprintf(buff,"item $ [%03lu]%p",i,listx.get(i));
+		LOG();
+		sprintf(buff,"item $ [%03lu]%p",listx.ListCount-i,listx.getI(listx.ListCount-i));
+		LOG();
+
 		#endif
 
 	}
 	#endif
+	
 	return 0;
 }

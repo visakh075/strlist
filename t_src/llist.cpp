@@ -16,25 +16,15 @@
 rtlog log=rtlog("result",APPEND);
 int main()
 {
-	#if(LOG_ENSY==1)
-	MEM_MAPS("POINTER >>");
-	#endif
-
+	LOG_STR("POINTER >>");
 	item * llist=(item*)malloc(sizeof(item));
-	
-	#if(LOG_ENSY==1)
-	MEM_MAPS("POINTER <<");
-	#endif
+	LOG_STR("POINTER <<");
+	LOG_STR("SET >>");
 
-	#if(LOG_ENSY==1)
-	MEM_MAPS("SET >>");
-	#endif
 
 	llist->set("first");
-	
-	#if(LOG_ENSY==1)
-	MEM_MAPS("SET <<");
-	#endif
+	LOG_STR("SET <<");
+
 
 	#if(TEST_N1_EN==1)
 	for (size_t i = 0; i < TEST_N1; i++)
@@ -49,9 +39,8 @@ int main()
 		list2.push(dummy[i]);
 	}
 	#endif
-	#if(LOG_ENSY==1)
-	MEM_MAPS("INSERT >>");
-	#endif
+	LOG_STR("INSERT >>");
+
 	#if(TEST_NX_EN==1)
 	for (size_t i = 0; i < TEST_NX; i++)
 	{
@@ -67,10 +56,10 @@ int main()
 		#endif
 
 	}
-	#if(LOG_ENSY==1)
-	MEM_MAPS("INSERT <<");
-	MEM_MAPS("PROBE >>");
-	#endif
+
+	LOG_STR("INSERT <<");
+	LOG_STR("PROBE >>");
+
 	for (size_t i = 0; i < TEST_NX; i++)
 	{
 		#if(LOG_ENSY==1)
@@ -82,9 +71,9 @@ int main()
 		llist->probe();
 		
 	}
-	#if(LOG_ENSY==1)
-	MEM_MAPS("PROBE <<");
-	#endif	
+
+	LOG_STR("PROBE <<");
+
 	#endif
 
 	return 0;

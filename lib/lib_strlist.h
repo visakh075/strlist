@@ -20,6 +20,7 @@ class item_c{
 		void con_tail(item_c *);
 		void con_head(item_c *);
 		item_c* push(const char *);
+		void operator = (const char *);
 };
 typedef class item_c item;
 class strlist_c{
@@ -33,6 +34,7 @@ class strlist_c{
 		void show();
 		item_c * get(uint index);
 		item_c * getI(uint index);
+		item_c * operator [] (uint index);
 
 };
 typedef class strlist_c strlist; 

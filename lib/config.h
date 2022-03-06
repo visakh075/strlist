@@ -9,14 +9,38 @@
 //  DEBUG >>
     #include "lib_rtlog.h"
     #if(LOG_ENSY==1)
-    extern rtlog map;
-    extern char buff[LOG_BUFF_SZ];
-    #define LOG() map + buff
-    #endif
+        extern rtlog map;
+        extern char buff[LOG_BUFF_SZ];
+        #define LOG() map + buff
+        // Wrappper
+        #define LOG_STR(x) ({sprintf(buff,x);map+buff;})
+        #define LOG_ITM_INIT() {\
+            sprintf(buff,"item * : %p %p",this,loc);\
+            map + buff;\
+        }
+        #define LOG_ITM_SET() {\
+            sprintf(buff,"item < : %p %p %s",this,loc,loc);\
+            map + buff;\
+        }
+        #define LOG_ITM_PROBE() {\
+            sprintf(buff,"item > : %p %p %s",this,loc,loc);\
+            map + buff;\
+        }
+        #define LOG_ITM_DEST() {\
+            sprintf(buff,"item ~ : %p %p %s",this,loc,loc);\
+            map + buff;\
+        }
+    #else
+        #define LOG()
+        // Wrappper
+        
+        #define LOG_STR(x)
+        #define LOG_ITM_INIT()
+        #define LOG_ITM_SET()
+        #define LOG_ITM_PROBE()
+        #define LOG_ITM_DEST()
 
-    // Wrappper
-    #define MEM_MAP map + buff
-    #define MEM_MAPS(x) ({sprintf(buff,x);map+buff;})
+    #endif
 //  DEBUG <<
 
 #endif

@@ -18,11 +18,11 @@ c_rtlog::~c_rtlog()
 }
 void c_rtlog::operator << (char const * str)
 {
-    fprintf(log,"\n%s",str);fflush(log);
+    fprintf(log,"%s\n",str);fflush(log);
 }
 void c_rtlog::operator + (char const * str)
 {
-    fprintf(log,"\n%s",str);fflush(log);
+    fprintf(log,"%s\n",str);fflush(log);
 }
 void c_rtlog::open(O_MODE mode)
 {
