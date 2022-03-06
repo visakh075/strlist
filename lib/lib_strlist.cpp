@@ -64,7 +64,6 @@ item::~item_c()
 }
 void item::set(const char * strptr)
 {
-	if(loc!=nullptr)free(loc);
 	loc=nullptr;
 	
 	loc=(char *)realloc(loc,sizeof(char)*strlen(strptr)+1);
@@ -79,6 +78,14 @@ void item::set(const char * strptr)
 		LOG_STR("memmory re-allocation error");
 	}
 	LOG_ITM_SET();
+}
+void item::reset(const char * strptr)
+{
+	if(loc!=nullptr)
+	{
+		free(loc);
+	}
+	set(strptr);
 }
 void item::probe()
 {
@@ -242,6 +249,6 @@ item * strlist::operator[] (uint index)
 }
 void item::operator = (const char * strptr)
 {
-	set(strptr);
+	reset(strptr);
 }
 // STRLIST <<<1

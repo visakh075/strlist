@@ -2,3 +2,4 @@ bin/*
 obj/*
 t_bin/*
 read_me.txt
+*.log
