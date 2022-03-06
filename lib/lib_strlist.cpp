@@ -77,6 +77,7 @@ item::~item_c()
 }
 void item::set(const char * strptr)
 {
+	if(loc!=nullptr)free(loc);
 	loc=nullptr;
 	
 	loc=(char *)realloc(loc,sizeof(char)*strlen(strptr)+1);
