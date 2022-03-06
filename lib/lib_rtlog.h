@@ -24,6 +24,7 @@ public:
     void close();
     void operator << (char const *);
     void operator + (char const *);
+    void operator + (int);
     
 };
 typedef class c_rtlog rtlog;

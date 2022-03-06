@@ -22,8 +22,13 @@ void c_rtlog::operator << (char const * str)
 }
 void c_rtlog::operator + (char const * str)
 {
-    fprintf(log,"%s\n",str);fflush(log);
+    fprintf(log,"%s",str);fflush(log);
 }
+void c_rtlog::operator + (int _int)
+{
+    fprintf(log,"%d",_int);fflush(log);
+}
+
 void c_rtlog::open(O_MODE mode)
 {
     switch (mode)
