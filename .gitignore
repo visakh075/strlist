@@ -2,5 +2,7 @@ bin/*
 obj/*
 t_bin/*
 read_me.txt
-*.log
-*_*.log
+strlist_map.log
+test_results.log
+result.log
+build.log
