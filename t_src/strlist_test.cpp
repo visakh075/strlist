@@ -18,21 +18,44 @@ int main()
 {
 	#if(TEST_NX_EN==1)
 	strlist listx;
+
+	#if(LOG_ENSY==1)
+		MEM_MAPS("initial push");
+	#endif
 	for (size_t i = 0; i < TEST_NX; i++)
 	{
 		listx.push(dummy[i]);
 	}
+
+	#if(LOG_ENSY==1)
+		MEM_MAPS("initial show");
+	#endif
 	listx.show();
+
+	#if(LOG_ENSY==1)
+		MEM_MAPS("replace");
+	#endif
+	
+	for (size_t i = 0; i < TEST_NX; i+=2)
+	{
+		listx.get(i)->set(dummy[TEST_NX+i]);
+	}
+
+	#if(LOG_ENSY==1)
+		MEM_MAPS("replace show");
+	#endif
+	listx.show();
+
 
 	for (size_t i = 0; i <=TEST_NX; i++)
 	{
 		#if(LOG_ENSY==1)
-		MEM_MAPS("<srch>");
-		sprintf(buff,"strlist $ [%lu]%p",i,listx.get(i));
-		LOG();
-		sprintf(buff,"strlist $ [%lu]%p",listx.ListCount-i,listx.getI(listx.ListCount-i));
-		LOG();
-		MEM_MAPS("</srch>");
+		// MEM_MAPS("<srch>");
+		// sprintf(buff,"strlist $ [%03lu]%p",i,listx.get(i));
+		// LOG();
+		// sprintf(buff,"strlist $ [%03lu]%p",listx.ListCount-i,listx.getI(listx.ListCount-i));
+		// LOG();
+		// MEM_MAPS("</srch>");
 		#endif
 
 	}

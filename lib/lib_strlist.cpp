@@ -99,6 +99,10 @@ void item::set(const char * strptr)
 }
 void item::probe()
 {
+	#if(LOG_ENSY==1)
+	sprintf(buff,"item > : %p %p %s",this,loc,loc);
+	LOG();
+	#endif
 	printf("\np:%p l:%p [i:%p o:%p] %s",this,loc,in,out,loc);
 }
 void item::con_tail(item * _tail)
