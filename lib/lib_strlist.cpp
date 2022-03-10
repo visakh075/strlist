@@ -251,4 +251,4 @@ void item::operator = (const char * strptr)
 {
 	reset(strptr);
 }
-// STRLIST <<<1
+// STRLIST <<<
