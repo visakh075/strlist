@@ -7,3 +7,4 @@ test_results.log
 result.log
 build.log
 *.log
+ignore*

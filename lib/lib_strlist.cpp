@@ -1,4 +1,3 @@
-#include "config.h"
 #include "lib_strlist.h"
 #include <stdlib.h>
 #include <stdio.h>
