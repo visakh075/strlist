@@ -12,8 +12,8 @@
 #include <stdlib.h>
 #include "lib_strlist.h"
 #include "dummy.h"
-#include "config.h"
-rtlog log=rtlog("result",APPEND);
+//#include "config.h"
+rtlog log=rtlog("result.log",APPEND);
 int main()
 {
 	LOG_STR("POINTER >>");

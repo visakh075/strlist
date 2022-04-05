@@ -46,6 +46,7 @@ class item_c{
 	public:
 		char * loc;
 		uint len;
+        double flag;
 		item_c *in ,*out;
 		item_c();
 		item_c(const char *);
@@ -63,7 +64,7 @@ typedef class item_c item;
 class strlist_c{
 	public:
 		item_c * head ,* tail;
-		uint ListCount;
+		uint len;
 		strlist_c();
 		~strlist_c();
 		void push(const char *);

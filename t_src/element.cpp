@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include "lib_strlist.h"
 #include "dummy.h"
-#include "config.h"
+//#include "config.h"
 rtlog log=rtlog("log",APPEND);
 
 // #if(LOG_ENSY==1)

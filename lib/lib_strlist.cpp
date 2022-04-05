@@ -14,6 +14,8 @@
 //	DEBUG <<<
 
 // EXTRA >>>
+namespace gen
+{
 uint strlen(const char * strptr)
 {
 	uint retVal=0;
@@ -23,6 +25,7 @@ uint strlen(const char * strptr)
 void strcpy(const char * frm,char * to)
 {
 	while((*to++=*frm++)){};
+}
 }
 // EXTRA <<<
 
@@ -65,12 +68,12 @@ void item::set(const char * strptr)
 {
 	loc=nullptr;
 	
-	loc=(char *)realloc(loc,sizeof(char)*strlen(strptr)+1);
+	loc=(char *)realloc(loc,sizeof(char)*gen::strlen(strptr)+1);
 	
 	if(loc!=nullptr)
 	{
-		strcpy(strptr,loc);
-		len=strlen(strptr);
+		gen::strcpy(strptr,loc);
+		len=gen::strlen(strptr);
 	}
 	else
 	{
@@ -124,12 +127,12 @@ strlist::strlist_c()
 	tail=(item *)malloc(sizeof(item));
 	LOG_STR("memmory allocation tail");
 	
-	ListCount=0;
+	len=0;
 }
 strlist::~strlist_c()
 {
 	
-	if (ListCount<3)
+	if (len<3)
 	{
 		//free(head->loc);free(tail->loc);
 		tail->~item_c();
@@ -160,19 +163,19 @@ void strlist::probe()
 void strlist::push(const char * _str)
 {
 	
-	if(ListCount==0)
+	if(len==0)
 	{
 		head->set(_str);
 		head->in=nullptr;
 		head->out=nullptr;
-		ListCount=1;
+		len=1;
 	}
-	else if(ListCount==1)
+	else if(len==1)
 	{
 		tail->set(_str);
 		head->con_tail(tail);
 		tail->out=nullptr;
-		ListCount=2;
+		len=2;
 	}
 	else
 	{
@@ -182,18 +185,18 @@ void strlist::push(const char * _str)
 		temp->set(_str);
 		tail->con_tail(temp);
 		tail=temp;
-		ListCount++;
+		len++;
 	}
 	
 }
 void strlist::show()
 {
 	
-	if(ListCount==0)
+	if(len==0)
 	{
 
 	}
-	else if(ListCount==1)
+	else if(len==1)
 	{
 		head->probe();
 	}
@@ -211,7 +214,7 @@ void strlist::show()
 item * strlist::get(uint idx)
 {
 	if(idx==0) return head;
-	else if(idx>0 && idx<=ListCount)
+	else if(idx>0 && idx<=len)
 	{
 		uint count=0;
 		item * temp;
@@ -228,7 +231,7 @@ item * strlist::get(uint idx)
 item * strlist::getI(uint idx)
 {
 	if(idx==0) return tail;
-	else if(idx>0 && idx<=ListCount)
+	else if(idx>0 && idx<=len)
 	{
 		uint count=0;
 		item * temp;

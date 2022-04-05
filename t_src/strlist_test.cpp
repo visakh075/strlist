@@ -45,7 +45,7 @@ int main()
 
 		sprintf(buff,"item $ [%03lu]%p",i,listx.get(i));
 		LOG();
-		sprintf(buff,"item $ [%03lu]%p",listx.ListCount-i,listx.getI(listx.ListCount-i));
+		sprintf(buff,"item $ [%03lu]%p",listx.len-i,listx.getI(listx.len-i));
 		LOG();
 
 		#endif
