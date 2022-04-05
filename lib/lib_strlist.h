@@ -76,5 +76,5 @@ class strlist_c{
 
 };
 typedef class strlist_c strlist; 
-uint strlen(const char *);
+//uint strlen(const char *);
 #endif
