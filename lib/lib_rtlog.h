@@ -3,7 +3,8 @@
 #include <stdio.h>
 #define N_MODE "wb"
 #define A_MODE "ab"
-
+namespace rt_log
+{
 enum O_MODE
 {
     NORMAL,
@@ -33,6 +34,6 @@ public:
     c_rtlog & operator + (void *);
     
     
-};
-typedef class c_rtlog rtlog;
+};}
+typedef class rt_log::c_rtlog rtlog;
 #endif

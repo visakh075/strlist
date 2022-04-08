@@ -7,7 +7,7 @@
 //	DEBUG >>>
 	// Definition
 	#if(LOG_ENSY==1)
-	rtlog map=rtlog(LOG_FILE,NORMAL);
+	rtlog map=rtlog(LOG_FILE,rt_log::NORMAL);
 	char buff[LOG_BUFF_SZ];
 	#define LOG() map << buff
 	#endif

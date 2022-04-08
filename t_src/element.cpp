@@ -5,7 +5,7 @@
 #include "lib_strlist.h"
 #include "dummy.h"
 //#include "config.h"
-rtlog log=rtlog("log",APPEND);
+rtlog log=rtlog("log",rt_log::APPEND);
 
 // #if(LOG_ENSY==1)
 // extern rtlog map;
