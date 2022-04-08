@@ -3,7 +3,6 @@
 #include "lib_strlist.h"
 #include "lib_rtlog.h"
 #include "dummy.h"
-rtlog log=rtlog("result.log",rt_log::APPEND);
 int main()
 {
     char Key;

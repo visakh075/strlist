@@ -13,7 +13,6 @@
 #include "lib_strlist.h"
 #include "dummy.h"
 //#include "config.h"
-rtlog log=rtlog("result.log",rt_log::APPEND);
 int main()
 {
 	LOG_STR("POINTER >>");

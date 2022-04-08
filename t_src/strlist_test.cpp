@@ -14,7 +14,6 @@
 #include "lib_rtlog.h"
 #include "dummy.h"
 using namespace rt_log;
-rtlog log=rtlog("result.log",APPEND);
 int main()
 {
 	#if(TEST_NX_EN==1)
